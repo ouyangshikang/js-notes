@@ -3,7 +3,7 @@
  * @param target 目标对象
  * @param constructor 构造函数(function 或者 class)
  */
-export function myInstanceof(target: any, constructor: any) {
+export function customInstanceof(target: any, constructor: any) {
     if (target == null) return false;
 
     if (!['object', 'function'].includes(typeof target)) {

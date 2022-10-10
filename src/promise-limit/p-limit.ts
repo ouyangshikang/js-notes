@@ -1,20 +1,20 @@
 /**
  * 异步并发控制
- * @param promiseCreators 异步函数数组
+ * @param promiseTasks 异步任务数组
  * @param concurrentCount 并发数量
  * @returns
  */
-function pLimit(promiseCreators: Array<() => Promise<any>>, concurrentCount: number) {
+function pLimit(promiseTasks: Array<() => Promise<any>>, concurrentCount: number) {
     return new Promise((resolve, reject) => {
-        const pLength = promiseCreators.length;
+        const pLength = promiseTasks.length;
         let completeCount = 0;
         let currentIndex = 0;
 
         function addTask() {
             if (currentIndex < pLength) {
-                const p = promiseCreators[currentIndex]();
+                const task = promiseTasks[currentIndex]();
                 currentIndex++;
-                p.then(() => {
+                task.then(() => {
                     completeCount++;
                     if (completeCount === pLength) {
                         resolve(undefined);

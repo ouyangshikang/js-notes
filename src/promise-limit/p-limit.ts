@@ -35,17 +35,19 @@ function pLimit(promiseTasks: Array<() => Promise<any>>, concurrentCount: number
 }
 
 // 测试代码
-const fn = (id: number) => {
-    return () =>
-        new Promise((resolve) => {
-            console.log(`start request ${id}`);
-            const timeout = Math.random() * 10;
-            setTimeout(() => {
-                console.log(`end request ${id}`);
-                resolve(id);
-            }, timeout);
-        });
-};
-const promises = [fn(1), fn(2), fn(3), fn(4), fn(5), fn(6), fn(7), fn(8)];
+{
+    const fn = (id: number) => {
+        return () =>
+            new Promise((resolve) => {
+                console.log(`start request ${id}`);
+                const timeout = Math.random() * 10;
+                setTimeout(() => {
+                    console.log(`end request ${id}`);
+                    resolve(id);
+                }, timeout);
+            });
+    };
+    const promises = [fn(1), fn(2), fn(3), fn(4), fn(5), fn(6), fn(7), fn(8)];
 
-pLimit(promises, 3);
+    pLimit(promises, 3);
+}

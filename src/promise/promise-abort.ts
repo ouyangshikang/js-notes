@@ -2,10 +2,10 @@
  * 利用 Promise.race 实现 Promise.abort 方法
  */
 function promiseAbort(p: Promise<any>) {
-    let abort = (e?: any) => {};
+    let abort = (msg?: string) => {};
 
     let newP = new Promise((resolve, reject) => {
-        abort = (e) => reject(e);
+        abort = (msg) => reject(msg);
     });
 
     const result = Promise.race([p, newP]);
